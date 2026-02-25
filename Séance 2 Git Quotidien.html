@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Séance 2 – Git au Quotidien</title>
+<style>
+/* Theme Variables */
+:root {
+  --font-family-display: Arial, sans-serif;
+  --font-weight-display: 600;
+  --font-family-content: Arial, sans-serif;
+  --font-weight-content: 400;
+  --font-size-content: 16px;
+  --line-height-content: 1.4;
+}
+
+/* LIGHT THEME */
+body.theme-light {
+  --color-bg-base: #ffffff;
+  --color-bg-elevated: #f8fafc;
+  --color-bg-surface: #f1f5f9;
+  --color-bg-muted: #e2e8f0;
+  --color-text-primary: #0f172a;
+  --color-text-secondary: #475569;
+  --color-text-muted: #64748b;
+  --color-text-accent: #0284c7;
+  --color-primary: #0284c7;
+  --color-primary-foreground: #ffffff;
+}
+
+/* Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-family-content);
+  font-weight: var(--font-weight-content);
+  font-size: var(--font-size-content);
+  line-height: var(--line-height-content);
+  overflow-x: hidden;
+}
+
+/* Slide Container */
+.slide {
+  width: 960px;
+  height: 540px;
+  margin: 0 auto 20px;
+  display: flex;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Layout Utilities */
+.row { flex-direction: row; }
+.col { flex-direction: column; }
+.center {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.space-between { justify-content: space-between; }
+.items-center { align-items: center; }
+.items-start { align-items: flex-start; }
+.items-end { align-items: flex-end; }
+.fill-width { flex: 1; }
+.fill-height { flex: 1; display: flex; flex-direction: column; }
+
+/* Spacing */
+.gap-sm { gap: 0.5rem; }
+.gap-md { gap: 1rem; }
+.gap-lg { gap: 1.5rem; }
+.gap-xl { gap: 2rem; }
+.gap-2xl { gap: 3rem; }
+
+.p-4 { padding: 1rem; }
+.p-6 { padding: 1.5rem; }
+.p-8 { padding: 2rem; }
+.p-12 { padding: 3rem; }
+.p-16 { padding: 4rem; }
+
+.mb-2 { margin-bottom: 0.5rem; }
+.mb-4 { margin-bottom: 1rem; }
+.mb-6 { margin-bottom: 1.5rem; }
+.mb-8 { margin-bottom: 2rem; }
+.mb-12 { margin-bottom: 3rem; }
+
+.mt-2 { margin-top: 0.5rem; }
+.mt-4 { margin-top: 1rem; }
+.mt-6 { margin-top: 1.5rem; }
+.mt-8 { margin-top: 2rem; }
+.mt-12 { margin-top: 3rem; }
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-family-display);
+  font-weight: var(--font-weight-display);
+  line-height: 1.2;
+  margin: 0;
+}
+
+h1 { font-size: 3rem; }
+h2 { font-size: 2.25rem; }
+h3 { font-size: 1.75rem; }
+h4 { font-size: 1.5rem; }
+h5 { font-size: 1.25rem; }
+h6 { font-size: 1rem; }
+
+.text-6xl { font-size: 3.75rem; }
+.text-5xl { font-size: 3rem; }
+.text-4xl { font-size: 2.25rem; }
+.text-3xl { font-size: 1.875rem; }
+.text-2xl { font-size: 1.5rem; }
+.text-xl { font-size: 1.25rem; }
+.text-lg { font-size: 1.375rem; }
+.text-base { font-size: 1.125rem; }
+.text-sm { font-size: 1rem; }
+.text-xs { font-size: 0.875rem; }
+
+.font-bold { font-weight: 700; }
+.font-semibold { font-weight: 600; }
+.font-medium { font-weight: 500; }
+.font-normal { font-weight: 400; }
+
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+.opacity-90 { opacity: 0.9; }
+.opacity-80 { opacity: 0.8; }
+.opacity-70 { opacity: 0.7; }
+.opacity-60 { opacity: 0.6; }
+
+/* Lists */
+ul, ol {
+  margin-left: 2rem;
+  line-height: 1.8;
+}
+
+ul li { list-style: disc; }
+ol li { list-style: decimal; }
+
+li { margin-bottom: 0.75rem; }
+li:last-child { margin-bottom: 0; }
+</style>
+</head>
+<body class="theme-light">
+
+<!-- Slide 1: Page de titre -->
+<section class="slide p-16 col center" style="background-color: #0284c7; color: #ffffff;">
+  <h1 class="text-6xl mb-4" style="color: #ffffff;">Git au Quotidien</h1>
+  <p class="text-2xl" style="color: #ffffff;">Séance 2 – Suivi de versions et gestion des modifications</p>
+  <p class="text-sm mt-8" style="color: #ffffff;">Licence Génie Logiciel &amp; Technologies Web • 3h</p>
+</section>
+
+<!-- Slide 2: Objectifs de la séance -->
+<section class="slide p-16 col" style="background-color: #ffffff; color: #0f172a;">
+  <h2 class="mb-6" style="color: #0284c7;">Objectifs de la séance</h2>
+  <ul class="text-lg" style="color: #475569;">
+    <li>Comprendre les trois zones de Git (travail, staging, dépôt)</li>
+    <li>Maîtriser les commandes de comparaison et d'inspection</li>
+    <li>Corriger des erreurs courantes (commit oublié, mauvais message)</li>
+    <li>Gérer efficacement l'historique de votre projet</li>
+  </ul>
+</section>
+
+<!-- Slide 3: Rappel Séance 1 -->
+<section class="slide p-16 col" style="background-color: #ffffff; color: #0f172a;">
+  <h2 class="mb-6" style="color: #0284c7;">Rappel : Séance 1</h2>
+  <ul class="text-lg" style="color: #475569;">
+    <li>Le versionning résout le chaos des versions multiples</li>
+    <li>Git = système distribué puissant</li>
+    <li>Commandes de base : init, add, commit, status, log</li>
+    <li>Chaque commit = instantané du projet</li>
+  </ul>
+</section>
+
+<!-- Slide 4: Les trois zones de Git -->
+<section class="slide p-16 col" style="background-color: #ffffff; color: #0f172a;">
+  <h2 class="mb-6" style="color: #0284c7;">Les trois zones de Git</h2>
+  <ul class="text-lg" style="color: #475569;">
+    <li><strong style="color: #0284c7;">Working Directory :</strong> Dossier de travail (vos fichiers)</li>
+    <li><strong style="color: #0284c7;">Staging Area (Index) :</strong> Zone de préparation avant commit</li>
+    <li><strong style="color: #0284c7;">Repository (.git) :</strong> Historique des commits</li>
+  </ul>
+</section>
+
+<!-- Slide 5: Flux de travail Git -->
+<section class="slide p-16 col center" style="background-color: #ffffff; color: #0f172a;">
+  <h2 class="mb-8" style="color: #0284c7;">Flux de travail</h2>
+  <p class="text-xl" style="color: #475569;">Working Directory → <strong style="color: #0284c7;">git add</strong> → Staging Area</p>
+  <p class="text-xl mt-4" style="color: #475569;">Staging Area → <strong style="color: #0284c7;">git commit</strong> → Repository</p>
+</section>
+
+<!-- Slide 6: Cycle de vie détaillé -->
+<section class="slide p-16 col" style="background-color: #ffffff; color: #0f172a;">
+  <h2 class="mb-6" style="color: #0284c7;">Cycle de vie des fichiers (détaillé)</h2>
+  <ul class="text-lg" style="color: #475569;">
+    <li><strong style="color: #0284c7;">Untracked :</strong> Nouveau fichier, Git ne le suit pas encore</li>
+    <li><strong style="color: #0284c7;">Unmodified :</strong> Fichier commité, aucune modification</li>
+    <li><strong style="color: #0284c7;">Modified :</strong> Fichier modifié depuis dernier commit</li>
+    <li><strong style="color: #0284c7;">Staged :</strong> Modification prête à être commitée</li>
+  </ul>
+</section>
+
+<!-- Slide 7: git status en détail -->
+<section class="slide p-16 col" style="background-color: #ffffff; color: #0f172a;">
+  <h2 class="mb-6" style="color: #0284c7;">git status – Inspecter l'état</h2>
+  <p class="text-lg mb-4" style="color: #475569;">Affiche l'état actuel de votre dépôt :</p>
+  <ul class="text-lg" style="color: #475569;">
+    <li>Branche courante</li>
+    <li>Fichiers modifiés non stagés</li>
+    <li>Fichiers stagés prêts à commiter</li>
+    <li>Fichiers untracked</li>
+  </ul>
+</section>
+
+<!-- Slide 8: git diff -->
+<section class="slide p-16 col" style="background-color: #ffffff; color: #0f172a;">
+  <h2 class="mb-6" style="color: #0284c7;">git diff – Comparer les changements</h2>
+  <ul class="text-lg" style="color: #475569;">
+    <li><strong style="color: #0284c7;">git diff :</strong> Changements non stagés</li>
+    <li><strong style="color: #0284c7;">git diff --staged :</strong> Changements stagés</li>
+    <li><strong style="color: #0284c7;">git diff HEAD :</strong> Tous les changements depuis dernier commit</li>
+  </ul>
+</section>
+
+<!-- Slide 9: git add sélectif -->
+<section class="slide p-16 col" style="background-color: #ffffff; color: #0f172a;">
+  <h2 class="mb-6" style="color: #0284c7;">git add – Options utiles</h2>
+  <ul class="text-lg" style="color: #475569;">
+    <li><strong style="color: #0284c7;">git add fichier.txt :</strong> Ajouter un fichier spécifique</li>
+    <li><strong style="color: #0284c7;">git add . :</strong> Ajouter tous les fichiers du dossier courant</li>
+    <li><strong style="color: #0284c7;">git add -A :</strong> Ajouter tous les fichiers (y compris suppressions)</li>
+  </ul>
+</section>
+
+<!-- Slide 10: git log avancé -->
+<section class="slide p-16 col" style="background-color: #ffffff; color: #0f172a;">
+  <h2 class="mb-6" style="color: #0284c7;">git log – Options avancées</h2>
+  <ul class="text-lg" style="color: #475569;">
+    <li><strong style="color: #0284c7;">git log --oneline :</strong> Historique compact (1 ligne/commit)</li>
+    <li><strong style="color: #0284c7;">git log -n 5 :</strong> Afficher les 5 derniers commits</li>
+    <li><strong style="color: #0284c7;">git log --graph :</strong> Visualisation graphique</li>
+  </ul>
+</section>
+
+<!-- Slide 11: Corriger un commit -->
+<section class="slide p-16 col" style="background-color: #ffffff; color: #0f172a;">
+  <h2 class="mb-6" style="color: #0284c7;">Corriger le dernier commit</h2>
+  <p class="text-lg mb-4" style="color: #475569;">Vous avez oublié un fichier ou fait une erreur dans le message ?</p>
+  <p class="text-xl font-semibold mb-4" style="color: #0284c7; font-family: monospace;">git commit --amend</p>
+  <p class="text-base" style="color: #64748b;">⚠️ Modifie le dernier commit (ne pas utiliser si déjà poussé)</p>
+</section>
+
+<!-- Slide 12: Annuler des modifications -->
+<section class="slide p-16 col" style="background-color: #ffffff; color: #0f172a;">
+  <h2 class="mb-6" style="color: #0284c7;">Annuler des modifications</h2>
+  <ul class="text-lg" style="color: #475569;">
+    <li><strong style="color: #0284c7;">git restore fichier.txt :</strong> Annuler les modifs non stagées</li>
+    <li><strong style="color: #0284c7;">git restore --staged fichier.txt :</strong> Retirer du staging</li>
+    <li><strong style="color: #0284c7;">git checkout -- fichier.txt :</strong> (ancienne syntaxe)</li>
+  </ul>
+</section>
+
+<!-- Slide 13: git revert -->
+<section class="slide p-16 col" style="background-color: #ffffff; color: #0f172a;">
+  <h2 class="mb-6" style="color: #0284c7;">Annuler un commit (revert)</h2>
+  <p class="text-lg mb-4" style="color: #475569;">Créer un nouveau commit qui annule les changements d'un commit précédent :</p>
+  <p class="text-xl font-semibold" style="color: #0284c7; font-family: monospace;">git revert &lt;commit-hash&gt;</p>
+  <p class="text-base mt-4" style="color: #64748b;">✅ Sûr : conserve l'historique</p>
+</section>
+
+<!-- Slide 14: git reset (attention) -->
+<section class="slide p-16 col" style="background-color: #ffffff; color: #0f172a;">
+  <h2 class="mb-6" style="color: #0284c7;">git reset (usage avancé)</h2>
+  <ul class="text-lg" style="color: #475569;">
+    <li><strong style="color: #0284c7;">git reset --soft HEAD~1 :</strong> Annuler commit, garder staging</li>
+    <li><strong style="color: #0284c7;">git reset --mixed HEAD~1 :</strong> Annuler commit et staging</li>
+    <li><strong style="color: #0284c7;">git reset --hard HEAD~1 :</strong> Annuler tout (⚠️ dangereux)</li>
+  </ul>
+</section>
+
+<!-- Slide 15: Scénarios pratiques (1) -->
+<section class="slide p-16 col" style="background-color: #ffffff; color: #0f172a;">
+  <h2 class="mb-6" style="color: #0284c7;">Scénario 1 : Fichier oublié</h2>
+  <p class="text-lg mb-4" style="color: #475569;">J'ai fait un commit mais j'ai oublié un fichier !</p>
+  <p class="text-lg font-semibold" style="color: #0284c7; font-family: monospace;">git add fichier_oublie.txt</p>
+  <p class="text-lg font-semibold" style="color: #0284c7; font-family: monospace;">git commit --amend --no-edit</p>
+</section>
+
+<!-- Slide 16: Scénarios pratiques (2) -->
+<section class="slide p-16 col" style="background-color: #ffffff; color: #0f172a;">
+  <h2 class="mb-6" style="color: #0284c7;">Scénario 2 : Mauvais message de commit</h2>
+  <p class="text-lg mb-4" style="color: #475569;">Mon message de commit contient une faute ou n'est pas clair :</p>
+  <p class="text-lg font-semibold" style="color: #0284c7; font-family: monospace;">git commit --amend -m "Nouveau message"</p>
+</section>
+
+<!-- Slide 17: Scénarios pratiques (3) -->
+<section class="slide p-16 col" style="background-color: #ffffff; color: #0f172a;">
+  <h2 class="mb-6" style="color: #0284c7;">Scénario 3 : J'ai cassé le code</h2>
+  <p class="text-lg mb-4" style="color: #475569;">Je veux abandonner toutes mes modifications locales :</p>
+  <p class="text-lg font-semibold" style="color: #0284c7; font-family: monospace;">git restore .</p>
+  <p class="text-base mt-4" style="color: #64748b;">⚠️ Changements non stagés perdus définitivement</p>
+</section>
+
+<!-- Slide 18: TP Guidé -->
+<section class="slide p-16 col" style="background-color: #ffffff; color: #0f172a;">
+  <h2 class="mb-6" style="color: #0284c7;">TP Guidé (60 min)</h2>
+  <ol class="text-lg" style="color: #475569;">
+    <li>Modifier plusieurs fichiers, utiliser git diff</li>
+    <li>Ajouter sélectivement au staging, faire des commits</li>
+    <li>Corriger un commit avec --amend</li>
+    <li>Créer un commit à annuler avec revert</li>
+  </ol>
+</section>
+
+<!-- Slide 19: Bonnes pratiques -->
+<section class="slide p-16 col" style="background-color: #ffffff; color: #0f172a;">
+  <h2 class="mb-6" style="color: #0284c7;">Bonnes pratiques</h2>
+  <ul class="text-lg" style="color: #475569;">
+    <li>Faire des commits fréquents et petits</li>
+    <li>Toujours vérifier avec git status avant commit</li>
+    <li>Utiliser git diff pour réviser les changements</li>
+    <li>Écrire des messages de commit clairs et descriptifs</li>
+  </ul>
+</section>
+
+<!-- Slide 20: Récapitulatif -->
+<section class="slide p-16 col" style="background-color: #ffffff; color: #0f172a;">
+  <h2 class="mb-6" style="color: #0284c7;">Récapitulatif</h2>
+  <ul class="text-lg" style="color: #475569;">
+    <li>Git utilise trois zones : working, staging, repository</li>
+    <li>diff, status, log permettent d'inspecter l'état</li>
+    <li>amend, restore, revert corrigent les erreurs</li>
+    <li>reset est puissant mais à utiliser avec précaution</li>
+  </ul>
+</section>
+
+<!-- Slide 21: Prochaine séance -->
+<section class="slide p-16 col" style="background-color: #ffffff; color: #0f172a;">
+  <h2 class="mb-6" style="color: #0284c7;">Prochaine séance</h2>
+  <p class="text-xl mb-6" style="color: #475569;">Séance 3 : Dépôts distants et collaboration</p>
+  <ul class="text-lg" style="color: #475569;">
+    <li>Notion de dépôt distant (remote)</li>
+    <li>Commandes : clone, fetch, pull, push</li>
+    <li>Découverte de GitHub/GitLab</li>
+  </ul>
+</section>
+
+<!-- Slide 22: Questions -->
+<section class="slide p-16 col center" style="background-color: #0284c7; color: #ffffff;">
+  <h2 class="text-5xl mb-6" style="color: #ffffff;">Questions ?</h2>
+  <p class="text-xl" style="color: #ffffff;">N'hésitez pas à demander des clarifications</p>
+  <p class="text-sm mt-8" style="color: #ffffff;">Prochaine séance : Dépôts distants et collaboration</p>
+</section>
+
+</body>
+</html>

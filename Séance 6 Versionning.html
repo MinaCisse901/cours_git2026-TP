@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Séance 6 – Tags, Versions et Outils Avancés</title>
+<style>
+/* Theme Variables */
+:root {
+  --font-family-display: Arial, sans-serif;
+  --font-weight-display: 600;
+  --font-family-content: Arial, sans-serif;
+  --font-weight-content: 400;
+  --font-size-content: 16px;
+  --line-height-content: 1.4;
+}
+
+/* LIGHT THEME */
+body.theme-light {
+  --color-bg-base: #ffffff;
+  --color-bg-elevated: #f8fafc;
+  --color-bg-surface: #f1f5f9;
+  --color-bg-muted: #e2e8f0;
+  --color-text-primary: #0f172a;
+  --color-text-secondary: #475569;
+  --color-text-muted: #64748b;
+  --color-text-accent: #0284c7;
+  --color-primary: #0284c7;
+  --color-primary-foreground: #ffffff;
+}
+
+/* Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-family-content);
+  font-weight: var(--font-weight-content);
+  font-size: var(--font-size-content);
+  line-height: var(--line-height-content);
+  overflow-x: hidden;
+}
+
+/* Slide Container */
+.slide {
+  width: 960px;
+  height: 540px;
+  margin: 0 auto 20px;
+  display: flex;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Layout Utilities */
+.row { flex-direction: row; }
+.col { flex-direction: column; }
+.center {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.space-between { justify-content: space-between; }
+.items-center { align-items: center; }
+.items-start { align-items: flex-start; }
+.items-end { align-items: flex-end; }
+.fill-width { flex: 1; }
+.fill-height { flex: 1; display: flex; flex-direction: column; }
+
+/* Spacing */
+.gap-sm { gap: 0.5rem; }
+.gap-md { gap: 1rem; }
+.gap-lg { gap: 1.5rem; }
+.gap-xl { gap: 2rem; }
+.gap-2xl { gap: 3rem; }
+
+.p-4 { padding: 1rem; }
+.p-6 { padding: 1.5rem; }
+.p-8 { padding: 2rem; }
+.p-12 { padding: 3rem; }
+.p-16 { padding: 4rem; }
+
+.mb-2 { margin-bottom: 0.5rem; }
+.mb-4 { margin-bottom: 1rem; }
+.mb-6 { margin-bottom: 1.5rem; }
+.mb-8 { margin-bottom: 2rem; }
+.mb-12 { margin-bottom: 3rem; }
+
+.mt-2 { margin-top: 0.5rem; }
+.mt-4 { margin-top: 1rem; }
+.mt-6 { margin-top: 1.5rem; }
+.mt-8 { margin-top: 2rem; }
+.mt-12 { margin-top: 3rem; }
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-family-display);
+  font-weight: var(--font-weight-display);
+  line-height: 1.2;
+  margin: 0;
+}
+
+h1 { font-size: 3rem; }
+h2 { font-size: 2.25rem; }
+h3 { font-size: 1.75rem; }
+h4 { font-size: 1.5rem; }
+h5 { font-size: 1.25rem; }
+h6 { font-size: 1rem; }
+
+.text-6xl { font-size: 3.75rem; }
+.text-5xl { font-size: 3rem; }
+.text-4xl { font-size: 2.25rem; }
+.text-3xl { font-size: 1.875rem; }
+.text-2xl { font-size: 1.5rem; }
+.text-xl { font-size: 1.25rem; }
+.text-lg { font-size: 1.375rem; }
+.text-base { font-size: 1.125rem; }
+.text-sm { font-size: 1rem; }
+.text-xs { font-size: 0.875rem; }
+
+.font-bold { font-weight: 700; }
+.font-semibold { font-weight: 600; }
+.font-medium { font-weight: 500; }
+.font-normal { font-weight: 400; }
+
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+.opacity-90 { opacity: 0.9; }
+.opacity-80 { opacity: 0.8; }
+.opacity-70 { opacity: 0.7; }
+.opacity-60 { opacity: 0.6; }
+
+/* Lists */
+ul, ol {
+  margin-left: 2rem;
+  line-height: 1.8;
+}
+
+ul li { list-style: disc; }
+ol li { list-style: decimal; }
+
+li { margin-bottom: 0.75rem; }
+li:last-child { margin-bottom: 0; }
+</style>
+</head>
+<body class="theme-light">
+
+<!-- Slide 1: Page de titre -->
+<section class="slide p-16 col center" style="background-color: #0284c7; color: #ffffff;">
+  <h1 class="text-6xl mb-4" style="color: #ffffff;">Tags, Versions et Outils Avancés</h1>
+  <p class="text-2xl" style="color: #ffffff;">Séance 6 – Versionning sémantique et intégration IDE</p>
+  <p class="text-sm mt-8" style="color: #ffffff;">Licence Génie Logiciel &amp; Technologies Web • 3h</p>
+</section>
+
+<!-- Slide 2: Objectifs de la séance -->
+<section class="slide p-16 col" style="background-color: #ffffff; color: #0f172a;">
+  <h2 class="mb-6" style="color: #0284c7;">Objectifs de la séance</h2>
+  <ul class="text-lg" style="color: #475569;">
+    <li>Comprendre et créer des tags Git</li>
+    <li>Appliquer le versionning sémantique (semver)</li>
+    <li>Utiliser Git avec un IDE (VS Code)</li>
+    <li>Marquer et gérer les releases d'un projet</li>
+  </ul>
+</section>
+
+<!-- Slide 3: Rappel Séance 5 -->
+<section class="slide p-16 col" style="background-color: #ffffff; color: #0f172a;">
+  <h2 class="mb-6" style="color: #0284c7;">Rappel : Séance 5</h2>
+  <ul class="text-lg" style="color: #475569;">
+    <li>GitHub Flow : workflow collaboratif simple</li>
+    <li>Pull/Merge Requests pour revue de code</li>
+    <li>Bonnes pratiques de collaboration en équipe</li>
+    <li>Code review et communication ✅</li>
+  </ul>
+</section>
+
+<!-- Slide 4: Qu'est-ce qu'un tag ? -->
+<section class="slide p-16 col" style="background-color: #ffffff; color: #0f172a;">
+  <h2 class="mb-6" style="color: #0284c7;">Qu'est-ce qu'un tag Git ?</h2>
+  <p class="text-lg mb-4" style="color: #475569;">Un pointeur fixe vers un commit spécifique</p>
+  <ul class="text-lg" style="color: #475569;">
+    <li>Marque des versions importantes (releases)</li>
+    <li>Ne change jamais (contrairement aux branches)</li>
+    <li>Utilisé pour v1.0.0, v2.1.3, etc.</li>
+  </ul>
+</section>
+
+<!-- Slide 5: Pourquoi utiliser des tags ? -->
+<section class="slide p-16 col" style="background-color: #ffffff; color: #0f172a;">
+  <h2 class="mb-6" style="color: #0284c7;">Pourquoi utiliser des tags ?</h2>
+  <ul class="text-lg" style="color: #475569;">
+    <li>Identifier facilement les versions publiées</li>
+    <li>Revenir à une version spécifique rapidement</li>
+    <li>Documenter l'historique des releases</li>
+    <li>Faciliter le déploiement et la distribution</li>
+  </ul>
+</section>
+
+<!-- Slide 6: Types de tags -->
+<section class="slide p-16 col" style="background-color: #ffffff; color: #0f172a;">
+  <h2 class="mb-6" style="color: #0284c7;">Types de tags</h2>
+  <ul class="text-lg" style="color: #475569;">
+    <li><strong style="color: #0284c7;">Lightweight :</strong> Simple pointeur vers un commit</li>
+    <li><strong style="color: #0284c7;">Annotated :</strong> Objet Git complet avec métadonnées (auteur, date, message)</li>
+  </ul>
+  <p class="text-base mt-6" style="color: #64748b;">💡 Privilégier les tags annotés pour les releases</p>
+</section>
+
+<!-- Slide 7: Créer un tag lightweight -->
+<section class="slide p-16 col" style="background-color: #ffffff; color: #0f172a;">
+  <h2 class="mb-6" style="color: #0284c7;">Créer un tag lightweight</h2>
+  <p class="text-lg mb-4" style="color: #475569;">Tag simple sans métadonnées :</p>
+  <p class="text-xl font-semibold" style="color: #0284c7; font-family: monospace;">git tag v1.0.0</p>
+  <p class="text-base mt-6" style="color: #64748b;">Crée un tag sur le commit actuel (HEAD)</p>
+</section>
+
+<!-- Slide 8: Créer un tag annotated -->
+<section class="slide p-16 col" style="background-color: #ffffff; color: #0f172a;">
+  <h2 class="mb-6" style="color: #0284c7;">Créer un tag annotated</h2>
+  <p class="text-lg mb-4" style="color: #475569;">Tag avec message et métadonnées :</p>
+  <p class="text-xl font-semibold mb-4" style="color: #0284c7; font-family: monospace;">git tag -a v1.0.0 -m "Première version stable"</p>
+  <p class="text-base" style="color: #64748b;">✅ Recommandé pour marquer les releases officielles</p>
+</section>
+
+<!-- Slide 9: Lister les tags -->
+<section class="slide p-16 col" style="background-color: #ffffff; color: #0f172a;">
+  <h2 class="mb-6" style="color: #0284c7;">Lister et afficher les tags</h2>
+  <p class="text-lg mb-2" style="color: #475569;">Lister tous les tags :</p>
+  <p class="text-lg font-semibold mb-4" style="color: #0284c7; font-family: monospace;">git tag</p>
+  <p class="text-lg mb-2" style="color: #475569;">Voir les détails d'un tag :</p>
+  <p class="text-lg font-semibold" style="color: #0284c7; font-family: monospace;">git show v1.0.0</p>
+</section>
+
+<!-- Slide 10: Pousser les tags -->
+<section class="slide p-16 col" style="background-color: #ffffff; color: #0f172a;">
+  <h2 class="mb-6" style="color: #0284c7;">Pousser les tags vers le dépôt distant</h2>
+  <p class="text-lg mb-2" style="color: #475569;">Pousser un tag spécifique :</p>
+  <p class="text-lg font-semibold mb-4" style="color: #0284c7; font-family: monospace;">git push origin v1.0.0</p>
+  <p class="text-lg mb-2" style="color: #475569;">Pousser tous les tags :</p>
+  <p class="text-lg font-semibold" style="color: #0284c7; font-family: monospace;">git push origin --tags</p>
+</section>
+
+<!-- Slide 11: Versionning sémantique -->
+<section class="slide p-16 col center" style="background-color: #ffffff; color: #0f172a;">
+  <h2 class="mb-8" style="color: #0284c7;">Versionning sémantique (semver)</h2>
+  <p class="text-2xl font-semibold" style="color: #0284c7;">MAJOR.MINOR.PATCH</p>
+  <p class="text-xl mt-6" style="color: #475569;">Exemple : v2.3.1</p>
+</section>
+
+<!-- Slide 12: Structure semver -->
+<section class="slide p-16 col" style="background-color: #ffffff; color: #0f172a;">
+  <h2 class="mb-6" style="color: #0284c7;">Structure du versionning sémantique</h2>
+  <ul class="text-lg" style="color: #475569;">
+    <li><strong style="color: #0284c7;">MAJOR (2) :</strong> Changements incompatibles (breaking changes)</li>
+    <li><strong style="color: #0284c7;">MINOR (3) :</strong> Nouvelles fonctionnalités compatibles</li>
+    <li><strong style="color: #0284c7;">PATCH (1) :</strong> Corrections de bugs</li>
+  </ul>
+</section>
+
+<!-- Slide 13: Exemples de versions -->
+<section class="slide p-16 col" style="background-color: #ffffff; color: #0f172a;">
+  <h2 class="mb-6" style="color: #0284c7;">Exemples d'évolution de versions</h2>
+  <ul class="text-lg" style="color: #475569;">
+    <li>v1.0.0 → v1.0.1 : Correction d'un bug</li>
+    <li>v1.0.1 → v1.1.0 : Nouvelle fonctionnalité</li>
+    <li>v1.1.0 → v2.0.0 : Changement majeur incompatible</li>
+  </ul>
+</section>
+
+<!-- Slide 14: Checkout sur un tag -->
+<section class="slide p-16 col" style="background-color: #ffffff; color: #0f172a;">
+  <h2 class="mb-6" style="color: #0284c7;">Revenir à une version taguée</h2>
+  <p class="text-lg mb-4" style="color: #475569;">Examiner le code à une version spécifique :</p>
+  <p class="text-xl font-semibold" style="color: #0284c7; font-family: monospace;">git checkout v1.0.0</p>
+  <p class="text-base mt-6" style="color: #64748b;">⚠️ Mode "detached HEAD" : pour lecture uniquement</p>
+</section>
+
+<!-- Slide 15: Intégration Git dans VS Code -->
+<section class="slide p-16 col" style="background-color: #ffffff; color: #0f172a;">
+  <h2 class="mb-6" style="color: #0284c7;">Git dans VS Code</h2>
+  <p class="text-lg mb-4" style="color: #475569;">VS Code intègre Git nativement :</p>
+  <ul class="text-lg" style="color: #475569;">
+    <li>Panneau Source Control (icône branche)</li>
+    <li>Visualisation graphique des changements</li>
+    <li>Interface pour staging, commit, push, pull</li>
+  </ul>
+</section>
+
+<!-- Slide 16: Fonctionnalités VS Code -->
+<section class="slide p-16 col" style="background-color: #ffffff; color: #0f172a;">
+  <h2 class="mb-6" style="color: #0284c7;">Fonctionnalités Git dans VS Code</h2>
+  <ul class="text-lg" style="color: #475569;">
+    <li>Diff visuel ligne par ligne</li>
+    <li>Staging de fichiers par clic</li>
+    <li>Historique des commits (avec extension)</li>
+    <li>Gestion des branches et merge</li>
+  </ul>
+</section>
+
+<!-- Slide 17: GitLens extension -->
+<section class="slide p-16 col" style="background-color: #ffffff; color: #0f172a;">
+  <h2 class="mb-6" style="color: #0284c7;">Extension GitLens</h2>
+  <p class="text-lg mb-4" style="color: #475569;">Extension populaire pour améliorer Git dans VS Code :</p>
+  <ul class="text-lg" style="color: #475569;">
+    <li>Historique détaillé par fichier et ligne</li>
+    <li>Annotations git blame inline</li>
+    <li>Comparaison de branches visuellement</li>
+  </ul>
+</section>
+
+<!-- Slide 18: TP Guidé -->
+<section class="slide p-16 col" style="background-color: #ffffff; color: #0f172a;">
+  <h2 class="mb-6" style="color: #0284c7;">TP Guidé (60 min)</h2>
+  <ol class="text-lg" style="color: #475569;">
+    <li>Créer un tag annotated pour v1.0.0</li>
+    <li>Pousser le tag vers GitHub/GitLab</li>
+    <li>Créer une release sur GitHub avec changelog</li>
+    <li>Utiliser VS Code pour staging, commit et push</li>
+  </ol>
+</section>
+
+<!-- Slide 19: Bonnes pratiques - Tags -->
+<section class="slide p-16 col" style="background-color: #ffffff; color: #0f172a;">
+  <h2 class="mb-6" style="color: #0284c7;">Bonnes pratiques : Tags et versions</h2>
+  <ul class="text-lg" style="color: #475569;">
+    <li>Utiliser semver (MAJOR.MINOR.PATCH)</li>
+    <li>Toujours créer des tags annotés avec -a</li>
+    <li>Rédiger un changelog pour chaque release</li>
+    <li>Ne jamais modifier ou supprimer un tag publié</li>
+  </ul>
+</section>
+
+<!-- Slide 20: Récapitulatif -->
+<section class="slide p-16 col" style="background-color: #ffffff; color: #0f172a;">
+  <h2 class="mb-6" style="color: #0284c7;">Récapitulatif</h2>
+  <ul class="text-lg" style="color: #475569;">
+    <li>Tags = pointeurs fixes pour marquer versions</li>
+    <li>Semver = convention standard (MAJOR.MINOR.PATCH)</li>
+    <li>VS Code intègre Git avec interface graphique</li>
+    <li>GitLens enrichit l'expérience Git dans l'IDE</li>
+  </ul>
+</section>
+
+<!-- Slide 21: Prochaine séance -->
+<section class="slide p-16 col" style="background-color: #ffffff; color: #0f172a;">
+  <h2 class="mb-6" style="color: #0284c7;">Séance 7 (Finale)</h2>
+  <p class="text-xl mb-6" style="color: #475569;">Évaluation et mini-projet de groupe</p>
+  <ul class="text-lg" style="color: #475569;">
+    <li>Évaluation pratique individuelle</li>
+    <li>Mini-projet collaboratif en équipe</li>
+    <li>Synthèse du module et perspectives</li>
+  </ul>
+</section>
+
+<!-- Slide 22: Questions -->
+<section class="slide p-16 col center" style="background-color: #0284c7; color: #ffffff;">
+  <h2 class="text-5xl mb-6" style="color: #ffffff;">Questions ?</h2>
+  <p class="text-xl" style="color: #ffffff;">N'hésitez pas à demander des clarifications</p>
+  <p class="text-sm mt-8" style="color: #ffffff;">Prochaine séance : Évaluation finale et mini-projet</p>
+</section>
+
+</body>
+</html>

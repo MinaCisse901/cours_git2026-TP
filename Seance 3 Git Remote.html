@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Séance 3 – Dépôts Distants et Collaboration</title>
+<style>
+/* Theme Variables */
+:root {
+  --font-family-display: Arial, sans-serif;
+  --font-weight-display: 600;
+  --font-family-content: Arial, sans-serif;
+  --font-weight-content: 400;
+  --font-size-content: 16px;
+  --line-height-content: 1.4;
+}
+
+/* LIGHT THEME */
+body.theme-light {
+  --color-bg-base: #ffffff;
+  --color-bg-elevated: #f8fafc;
+  --color-bg-surface: #f1f5f9;
+  --color-bg-muted: #e2e8f0;
+  --color-text-primary: #0f172a;
+  --color-text-secondary: #475569;
+  --color-text-muted: #64748b;
+  --color-text-accent: #0284c7;
+  --color-primary: #0284c7;
+  --color-primary-foreground: #ffffff;
+}
+
+/* Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-family-content);
+  font-weight: var(--font-weight-content);
+  font-size: var(--font-size-content);
+  line-height: var(--line-height-content);
+  overflow-x: hidden;
+}
+
+/* Slide Container */
+.slide {
+  width: 960px;
+  height: 540px;
+  margin: 0 auto 20px;
+  display: flex;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Layout Utilities */
+.row { flex-direction: row; }
+.col { flex-direction: column; }
+.center {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.space-between { justify-content: space-between; }
+.items-center { align-items: center; }
+.items-start { align-items: flex-start; }
+.items-end { align-items: flex-end; }
+.fill-width { flex: 1; }
+.fill-height { flex: 1; display: flex; flex-direction: column; }
+
+/* Spacing */
+.gap-sm { gap: 0.5rem; }
+.gap-md { gap: 1rem; }
+.gap-lg { gap: 1.5rem; }
+.gap-xl { gap: 2rem; }
+.gap-2xl { gap: 3rem; }
+
+.p-4 { padding: 1rem; }
+.p-6 { padding: 1.5rem; }
+.p-8 { padding: 2rem; }
+.p-12 { padding: 3rem; }
+.p-16 { padding: 4rem; }
+
+.mb-2 { margin-bottom: 0.5rem; }
+.mb-4 { margin-bottom: 1rem; }
+.mb-6 { margin-bottom: 1.5rem; }
+.mb-8 { margin-bottom: 2rem; }
+.mb-12 { margin-bottom: 3rem; }
+
+.mt-2 { margin-top: 0.5rem; }
+.mt-4 { margin-top: 1rem; }
+.mt-6 { margin-top: 1.5rem; }
+.mt-8 { margin-top: 2rem; }
+.mt-12 { margin-top: 3rem; }
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-family-display);
+  font-weight: var(--font-weight-display);
+  line-height: 1.2;
+  margin: 0;
+}
+
+h1 { font-size: 3rem; }
+h2 { font-size: 2.25rem; }
+h3 { font-size: 1.75rem; }
+h4 { font-size: 1.5rem; }
+h5 { font-size: 1.25rem; }
+h6 { font-size: 1rem; }
+
+.text-6xl { font-size: 3.75rem; }
+.text-5xl { font-size: 3rem; }
+.text-4xl { font-size: 2.25rem; }
+.text-3xl { font-size: 1.875rem; }
+.text-2xl { font-size: 1.5rem; }
+.text-xl { font-size: 1.25rem; }
+.text-lg { font-size: 1.375rem; }
+.text-base { font-size: 1.125rem; }
+.text-sm { font-size: 1rem; }
+.text-xs { font-size: 0.875rem; }
+
+.font-bold { font-weight: 700; }
+.font-semibold { font-weight: 600; }
+.font-medium { font-weight: 500; }
+.font-normal { font-weight: 400; }
+
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+.opacity-90 { opacity: 0.9; }
+.opacity-80 { opacity: 0.8; }
+.opacity-70 { opacity: 0.7; }
+.opacity-60 { opacity: 0.6; }
+
+/* Lists */
+ul, ol {
+  margin-left: 2rem;
+  line-height: 1.8;
+}
+
+ul li { list-style: disc; }
+ol li { list-style: decimal; }
+
+li { margin-bottom: 0.75rem; }
+li:last-child { margin-bottom: 0; }
+</style>
+</head>
+<body class="theme-light">
+
+<!-- Slide 1: Page de titre -->
+<section class="slide p-16 col center" style="background-color: #0284c7; color: #ffffff;">
+  <h1 class="text-6xl mb-4" style="color: #ffffff;">Dépôts Distants et Collaboration</h1>
+  <p class="text-2xl" style="color: #ffffff;">Séance 3 – Travailler avec GitHub / GitLab</p>
+  <p class="text-sm mt-8" style="color: #ffffff;">Licence Génie Logiciel &amp; Technologies Web • 3h</p>
+</section>
+
+<!-- Slide 2: Objectifs de la séance -->
+<section class="slide p-16 col" style="background-color: #ffffff; color: #0f172a;">
+  <h2 class="mb-6" style="color: #0284c7;">Objectifs de la séance</h2>
+  <ul class="text-lg" style="color: #475569;">
+    <li>Comprendre la notion de dépôt distant (remote)</li>
+    <li>Configurer et utiliser un dépôt distant (GitHub/GitLab)</li>
+    <li>Maîtriser clone, fetch, pull, push</li>
+    <li>Publier et partager un projet en ligne</li>
+  </ul>
+</section>
+
+<!-- Slide 3: Rappel Séance 2 -->
+<section class="slide p-16 col" style="background-color: #ffffff; color: #0f172a;">
+  <h2 class="mb-6" style="color: #0284c7;">Rappel : Séance 2</h2>
+  <ul class="text-lg" style="color: #475569;">
+    <li>Trois zones : working, staging, repository</li>
+    <li>Commandes : status, diff, log, add, commit</li>
+    <li>Correction d'erreurs : amend, restore, revert, reset</li>
+    <li>Travail local entièrement maîtrisé ✅</li>
+  </ul>
+</section>
+
+<!-- Slide 4: Pourquoi un dépôt distant ? -->
+<section class="slide p-16 col" style="background-color: #ffffff; color: #0f172a;">
+  <h2 class="mb-6" style="color: #0284c7;">Pourquoi un dépôt distant ?</h2>
+  <ul class="text-lg" style="color: #475569;">
+    <li>Sauvegarder le code en ligne (sécurité)</li>
+    <li>Collaborer avec d'autres développeurs</li>
+    <li>Partager le projet avec la communauté</li>
+    <li>Accéder au code depuis n'importe où</li>
+  </ul>
+</section>
+
+<!-- Slide 5: Dépôt local vs distant -->
+<section class="slide p-16 col center" style="background-color: #ffffff; color: #0f172a;">
+  <h2 class="mb-8" style="color: #0284c7;">Architecture distribuée</h2>
+  <p class="text-xl" style="color: #475569;">Dépôt local (votre ordinateur)</p>
+  <p class="text-2xl mt-4 mb-4" style="color: #0284c7;">⬆️ push / pull ⬇️</p>
+  <p class="text-xl" style="color: #475569;">Dépôt distant (GitHub/GitLab/Bitbucket)</p>
+</section>
+
+<!-- Slide 6: Qu'est-ce qu'un remote ? -->
+<section class="slide p-16 col" style="background-color: #ffffff; color: #0f172a;">
+  <h2 class="mb-6" style="color: #0284c7;">Qu'est-ce qu'un remote ?</h2>
+  <p class="text-lg mb-4" style="color: #475569;">Un <strong style="color: #0284c7;">remote</strong> est une référence à un dépôt distant</p>
+  <ul class="text-lg" style="color: #475569;">
+    <li>Nom conventionnel : <strong style="color: #0284c7;">origin</strong></li>
+    <li>URL du dépôt distant (HTTPS ou SSH)</li>
+    <li>Permet de synchroniser local ↔ distant</li>
+  </ul>
+</section>
+
+<!-- Slide 7: Plateformes populaires -->
+<section class="slide p-16 col" style="background-color: #ffffff; color: #0f172a;">
+  <h2 class="mb-6" style="color: #0284c7;">Plateformes d'hébergement Git</h2>
+  <ul class="text-lg" style="color: #475569;">
+    <li><strong style="color: #0284c7;">GitHub :</strong> La plus populaire (Microsoft)</li>
+    <li><strong style="color: #0284c7;">GitLab :</strong> Open source, CI/CD intégré</li>
+    <li><strong style="color: #0284c7;">Bitbucket :</strong> Intégration Atlassian (Jira)</li>
+  </ul>
+  <p class="text-base mt-6" style="color: #64748b;">Nous utiliserons GitHub/GitLab dans ce cours</p>
+</section>
+
+<!-- Slide 8: Créer un compte -->
+<section class="slide p-16 col" style="background-color: #ffffff; color: #0f172a;">
+  <h2 class="mb-6" style="color: #0284c7;">Créer un compte (GitHub/GitLab)</h2>
+  <ol class="text-lg" style="color: #475569;">
+    <li>Aller sur github.com ou gitlab.com</li>
+    <li>S'inscrire avec email (gratuit)</li>
+    <li>Vérifier l'email de confirmation</li>
+    <li>Configurer le profil (nom, photo, bio)</li>
+  </ol>
+</section>
+
+<!-- Slide 9: Créer un dépôt distant -->
+<section class="slide p-16 col" style="background-color: #ffffff; color: #0f172a;">
+  <h2 class="mb-6" style="color: #0284c7;">Créer un nouveau dépôt</h2>
+  <ol class="text-lg" style="color: #475569;">
+    <li>Cliquer sur "New repository" (GitHub) ou "New project" (GitLab)</li>
+    <li>Nommer le dépôt (ex. mon-projet-git)</li>
+    <li>Choisir Public ou Private</li>
+    <li>Ne pas initialiser avec README (on a déjà un projet local)</li>
+  </ol>
+</section>
+
+<!-- Slide 10: git remote add -->
+<section class="slide p-16 col" style="background-color: #ffffff; color: #0f172a;">
+  <h2 class="mb-6" style="color: #0284c7;">Lier un dépôt local à un dépôt distant</h2>
+  <p class="text-lg mb-4" style="color: #475569;">Ajouter le remote origin :</p>
+  <p class="text-lg font-semibold mb-4" style="color: #0284c7; font-family: monospace;">git remote add origin https://github.com/user/repo.git</p>
+  <p class="text-lg" style="color: #475569;">Vérifier :</p>
+  <p class="text-lg font-semibold" style="color: #0284c7; font-family: monospace;">git remote -v</p>
+</section>
+
+<!-- Slide 11: git push -->
+<section class="slide p-16 col" style="background-color: #ffffff; color: #0f172a;">
+  <h2 class="mb-6" style="color: #0284c7;">Envoyer des commits (push)</h2>
+  <p class="text-lg mb-4" style="color: #475569;">Pousser vos commits vers le dépôt distant :</p>
+  <p class="text-xl font-semibold mb-4" style="color: #0284c7; font-family: monospace;">git push -u origin main</p>
+  <p class="text-base" style="color: #64748b;">-u : configure le suivi de la branche distante</p>
+</section>
+
+<!-- Slide 12: git clone -->
+<section class="slide p-16 col" style="background-color: #ffffff; color: #0f172a;">
+  <h2 class="mb-6" style="color: #0284c7;">Cloner un dépôt distant</h2>
+  <p class="text-lg mb-4" style="color: #475569;">Télécharger un dépôt existant :</p>
+  <p class="text-xl font-semibold mb-4" style="color: #0284c7; font-family: monospace;">git clone https://github.com/user/repo.git</p>
+  <p class="text-base" style="color: #64748b;">Crée un dossier avec le nom du dépôt, configure automatiquement origin</p>
+</section>
+
+<!-- Slide 13: git fetch -->
+<section class="slide p-16 col" style="background-color: #ffffff; color: #0f172a;">
+  <h2 class="mb-6" style="color: #0284c7;">Récupérer les changements (fetch)</h2>
+  <p class="text-lg mb-4" style="color: #475569;">Télécharger les nouveaux commits sans les fusionner :</p>
+  <p class="text-xl font-semibold" style="color: #0284c7; font-family: monospace;">git fetch origin</p>
+  <p class="text-base mt-4" style="color: #64748b;">✅ Sécurisé : permet d'inspecter avant fusion</p>
+</section>
+
+<!-- Slide 14: git pull -->
+<section class="slide p-16 col" style="background-color: #ffffff; color: #0f172a;">
+  <h2 class="mb-6" style="color: #0284c7;">Récupérer et fusionner (pull)</h2>
+  <p class="text-lg mb-4" style="color: #475569;">Télécharger et fusionner automatiquement :</p>
+  <p class="text-xl font-semibold mb-4" style="color: #0284c7; font-family: monospace;">git pull origin main</p>
+  <p class="text-base" style="color: #64748b;">pull = fetch + merge</p>
+</section>
+
+<!-- Slide 15: fetch vs pull -->
+<section class="slide p-16 col" style="background-color: #ffffff; color: #0f172a;">
+  <h2 class="mb-6" style="color: #0284c7;">Différence fetch vs pull</h2>
+  <ul class="text-lg" style="color: #475569;">
+    <li><strong style="color: #0284c7;">fetch :</strong> Télécharge sans fusionner (sécurisé)</li>
+    <li><strong style="color: #0284c7;">pull :</strong> Télécharge et fusionne automatiquement</li>
+  </ul>
+  <p class="text-base mt-6" style="color: #64748b;">💡 Bonne pratique : fetch d'abord, inspecter, puis merge</p>
+</section>
+
+<!-- Slide 16: Flux collaboratif typique -->
+<section class="slide p-16 col" style="background-color: #ffffff; color: #0f172a;">
+  <h2 class="mb-6" style="color: #0284c7;">Workflow collaboratif</h2>
+  <ol class="text-lg" style="color: #475569;">
+    <li>Faire vos modifications localement</li>
+    <li>Commiter vos changements</li>
+    <li>Fetch/Pull pour récupérer changements des autres</li>
+    <li>Résoudre conflits éventuels</li>
+    <li>Push vers le dépôt distant</li>
+  </ol>
+</section>
+
+<!-- Slide 17: README et .gitignore -->
+<section class="slide p-16 col" style="background-color: #ffffff; color: #0f172a;">
+  <h2 class="mb-6" style="color: #0284c7;">Fichiers importants</h2>
+  <ul class="text-lg" style="color: #475569;">
+    <li><strong style="color: #0284c7;">README.md :</strong> Documentation du projet (Markdown)</li>
+    <li><strong style="color: #0284c7;">.gitignore :</strong> Fichiers à ne pas versionner</li>
+  </ul>
+  <p class="text-base mt-6" style="color: #64748b;">Ex. .gitignore : node_modules/, *.log, .env</p>
+</section>
+
+<!-- Slide 18: TP Guidé -->
+<section class="slide p-16 col" style="background-color: #ffffff; color: #0f172a;">
+  <h2 class="mb-6" style="color: #0284c7;">TP Guidé (60 min)</h2>
+  <ol class="text-lg" style="color: #475569;">
+    <li>Créer un compte GitHub/GitLab</li>
+    <li>Créer un nouveau dépôt distant</li>
+    <li>Publier votre projet local (remote add, push)</li>
+    <li>Cloner le dépôt du professeur, modifier, push</li>
+  </ol>
+</section>
+
+<!-- Slide 19: Bonnes pratiques -->
+<section class="slide p-16 col" style="background-color: #ffffff; color: #0f172a;">
+  <h2 class="mb-6" style="color: #0284c7;">Bonnes pratiques</h2>
+  <ul class="text-lg" style="color: #475569;">
+    <li>Toujours pull avant de commencer à travailler</li>
+    <li>Commiter et push régulièrement</li>
+    <li>Écrire un README.md clair et complet</li>
+    <li>Utiliser .gitignore pour exclure fichiers inutiles</li>
+  </ul>
+</section>
+
+<!-- Slide 20: Récapitulatif -->
+<section class="slide p-16 col" style="background-color: #ffffff; color: #0f172a;">
+  <h2 class="mb-6" style="color: #0284c7;">Récapitulatif</h2>
+  <ul class="text-lg" style="color: #475569;">
+    <li>Remote = référence à un dépôt distant (origin)</li>
+    <li>clone : télécharger un dépôt existant</li>
+    <li>push : envoyer vos commits</li>
+    <li>fetch/pull : récupérer les changements des autres</li>
+  </ul>
+</section>
+
+<!-- Slide 21: Prochaine séance -->
+<section class="slide p-16 col" style="background-color: #ffffff; color: #0f172a;">
+  <h2 class="mb-6" style="color: #0284c7;">Prochaine séance</h2>
+  <p class="text-xl mb-6" style="color: #475569;">Séance 4 : Branches et fusion</p>
+  <ul class="text-lg" style="color: #475569;">
+    <li>Créer et gérer des branches</li>
+    <li>Fusionner des branches (merge)</li>
+    <li>Résoudre les conflits de fusion</li>
+  </ul>
+</section>
+
+<!-- Slide 22: Questions -->
+<section class="slide p-16 col center" style="background-color: #0284c7; color: #ffffff;">
+  <h2 class="text-5xl mb-6" style="color: #ffffff;">Questions ?</h2>
+  <p class="text-xl" style="color: #ffffff;">N'hésitez pas à demander des clarifications</p>
+  <p class="text-sm mt-8" style="color: #ffffff;">Prochaine séance : Branches et fusion</p>
+</section>
+
+</body>
+</html>
